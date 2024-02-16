@@ -50,7 +50,9 @@ class WaterBucketSolverCubit extends Cubit<WaterBucketSolverState> {
   }
 
   void solve(int x, int y, int z) {
-    if (!canSolve(x, y, z)) emit(state.copyWith(solutionSteps: []));
+    if (!canSolve(x, y, z)) {
+      emit(state.copyWith(solutionSteps: [], isSolutionFound: true));
+    }
     visited = <BucketState>{};
     Queue<List<BucketAction>> queue = Queue();
     queue.add([BucketAction(BucketState(0, 0), '')]); // Add initial state without the "Start" label

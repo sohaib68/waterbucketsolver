@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:waterbucketsolver/pages/waterbucket_solver_cubit.dart';
 
@@ -38,9 +39,13 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
+                        autofocus: true,
                         controller: _xController,
-                        decoration: const InputDecoration(labelText: 'X Jug Capacity'),
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                                icon: const Icon(Icons.close), iconSize: 20, onPressed: () => _xController.clear())),
                         keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                       ),
                     ),
                   ),
@@ -49,8 +54,11 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
                         controller: _yController,
-                        decoration: const InputDecoration(labelText: 'Y Jug Capacity'),
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                                icon: const Icon(Icons.close), iconSize: 20, onPressed: () => _yController.clear())),
                         keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                       ),
                     ),
                   ),
@@ -59,14 +67,16 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
                         controller: _zController,
-                        decoration: const InputDecoration(labelText: 'Target Z Amount'),
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                                icon: const Icon(Icons.close), iconSize: 20, onPressed: () => _zController.clear())),
                         keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                       ),
                     ),
                   ),
                 ],
               ),
-
               ElevatedButton(
                 onPressed: _solveWaterJugProblem,
                 child: const Text('Solve'),
