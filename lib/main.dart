@@ -114,26 +114,26 @@ class WaterJugSolverPageState extends State<WaterJugSolverPage> {
                                   (step) => DataRow(
                                       color: MaterialStateProperty.resolveWith((states) {
                                         if (step.key + 1 == _solutionSteps.length) {
-                                          return Colors.lightGreen.shade400;
+                                          return Colors.lightGreen.shade200;
                                         } else {
                                           return Colors.white;
                                         }
                                       }),
                                       cells: [
                                         DataCell(ConstrainedBox(
-                                          constraints: const BoxConstraints(maxWidth: 30),
+                                          constraints: const BoxConstraints(maxWidth: 50),
                                           child: Text(
                                             '${(step.key + 1).toString()}.',
                                             style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                           ),
                                         )),
                                         DataCell(ConstrainedBox(
-                                          constraints: const BoxConstraints(maxWidth: 30),
+                                          constraints: const BoxConstraints(maxWidth: 50),
                                           child: Text(step.value['x'] ?? '',
                                               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                                         )),
                                         DataCell(ConstrainedBox(
-                                          constraints: const BoxConstraints(maxWidth: 30),
+                                          constraints: const BoxConstraints(maxWidth: 50),
                                           child: Text(step.value['y'] ?? '',
                                               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                                         )),
