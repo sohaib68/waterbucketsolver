@@ -1,29 +1,37 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:waterbucketsolver/main.dart';
+import 'package:waterbucketsolver/pages/waterbucket_solver_page.dart';
+import 'package:waterbucketsolver/pages/waterbucket_solver_cubit.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const WaterBucketApp());
+  testWidgets('WaterBucketSolverPage UI Test', (WidgetTester tester) async {
+    // Create a mock cubit instance
+    final cubit = WaterBucketSolverCubit();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Provide the cubit to the widget tree
+    await tester.pumpWidget(MaterialApp(
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider<WaterBucketSolverCubit>.value(value: cubit),
+        ],
+        child: const WaterBucketSolverPage(),
+      ),
+    ));
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    // Verify that the title is displayed
+    expect(find.text('Water Bucket Challenge Solver'), findsOneWidget);
+
+    // Enter values in text fields
+    await tester.enterText(find.byKey(const ValueKey('XTextField')), '5');
+    await tester.enterText(find.byKey(const ValueKey('YTextField')), '3');
+    await tester.enterText(find.byKey(const ValueKey('ZTextField')), '4');
+
+    // Tap on the solve button
+    await tester.tap(find.text('Solve'));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify that the solution steps are displayed
+    expect(find.byType(DataTable), findsOneWidget);
   });
 }

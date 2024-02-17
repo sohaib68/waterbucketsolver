@@ -15,6 +15,7 @@ class CustomIntTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return TextField(
+      key: key,
       autofocus: autoFocus ?? false,
       focusNode: focusNode,
       controller: controller,

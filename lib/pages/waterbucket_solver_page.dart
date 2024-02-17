@@ -74,6 +74,7 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
                           child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: CustomIntTextField(
+                                key: const ValueKey('XTextField'),
                                 autoFocus: true,
                                 focusNode: _xFocus,
                                 nextFocus: _yFocus,
@@ -84,6 +85,7 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
                           child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: CustomIntTextField(
+                                key: const ValueKey('YTextField'),
                                 focusNode: _yFocus,
                                 nextFocus: _zFocus,
                                 controller: _yController,
@@ -93,6 +95,7 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
                           child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: CustomIntTextField(
+                                key: const ValueKey('ZTextField'),
                                 focusNode: _zFocus,
                                 nextFocus: _xFocus,
                                 controller: _zController,
