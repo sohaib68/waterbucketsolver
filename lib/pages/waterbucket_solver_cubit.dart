@@ -51,7 +51,7 @@ class WaterBucketSolverCubit extends Cubit<WaterBucketSolverState> {
 
   void solve(int x, int y, int z) {
     if (!canSolve(x, y, z)) {
-      emit(state.copyWith(solutionSteps: [], isSolutionFound: true));
+      emit(state.copyWith(solutionSteps: [], solutionNotFound: true));
     }
     visited = <BucketState>{};
     Queue<List<BucketAction>> queue = Queue();
@@ -76,7 +76,7 @@ class WaterBucketSolverCubit extends Cubit<WaterBucketSolverState> {
             'explanation': 'Achieve target directly'
           });
         }
-        emit(state.copyWith(solutionSteps: solutionSteps, isSolutionFound: true));
+        emit(state.copyWith(solutionSteps: solutionSteps, solutionNotFound: true));
       }
 
       if (!visited.contains(currentState)) {

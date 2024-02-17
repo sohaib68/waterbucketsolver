@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:waterbucketsolver/pages/waterbucket_solver_cubit.dart';
+import 'package:waterbucketsolver/widgets/custrom_int_textfield.dart';
 
 class WaterBucketSolverPage extends StatefulWidget {
   const WaterBucketSolverPage({super.key});
@@ -14,14 +15,37 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
   final TextEditingController _xController = TextEditingController();
   final TextEditingController _yController = TextEditingController();
   final TextEditingController _zController = TextEditingController();
+  final FocusNode _xFocus = FocusNode();
+  final FocusNode _yFocus = FocusNode();
+  final FocusNode _zFocus = FocusNode();
+
+  @override
+  void dispose() {
+    _xController.dispose();
+    _yController.dispose();
+    _zController.dispose();
+    _xFocus.dispose();
+    _yFocus.dispose();
+    _zFocus.dispose();
+    super.dispose();
+  }
 
   void _solveWaterJugProblem() {
     final cubit = context.read<WaterBucketSolverCubit>();
-    final int x = int.parse(_xController.text);
-    final int y = int.parse(_yController.text);
-    final int z = int.parse(_zController.text);
-    cubit.solve(x, y, z);
+    final int? x = int.tryParse(_xController.text);
+    final int? y = int.tryParse(_yController.text);
+    final int? z = int.tryParse(_zController.text);
+    if (x == null || y == null || z == null) {
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      cubit.solve(x, y, z);
+    }
   }
+
+  final snackBar = const SnackBar(
+    showCloseIcon: true,
+    content: Text('Please enter a value for all fields.'),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -33,54 +57,57 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
           ),
           body: Column(
             children: <Widget>[
-              Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        autofocus: true,
-                        controller: _xController,
-                        decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                                icon: const Icon(Icons.close), iconSize: 20, onPressed: () => _xController.clear())),
-                        keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+              Container(
+                margin: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1.0),
+                  borderRadius: const BorderRadius.all(Radius.circular(10.0) //                 <--- border radius here
                       ),
+                ),
+                child: Column(
+                  children: [
+                    const Text('Please enter integer only values'),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CustomIntTextField(
+                                autoFocus: true,
+                                focusNode: _xFocus,
+                                nextFocus: _yFocus,
+                                controller: _xController,
+                              )),
+                        ),
+                        Expanded(
+                          child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CustomIntTextField(
+                                focusNode: _yFocus,
+                                nextFocus: _zFocus,
+                                controller: _yController,
+                              )),
+                        ),
+                        Expanded(
+                          child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CustomIntTextField(
+                                focusNode: _zFocus,
+                                nextFocus: _xFocus,
+                                controller: _zController,
+                              )),
+                        ),
+                      ],
                     ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        controller: _yController,
-                        decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                                icon: const Icon(Icons.close), iconSize: 20, onPressed: () => _yController.clear())),
-                        keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-                      ),
+                    ElevatedButton(
+                      onPressed: _solveWaterJugProblem,
+                      child: const Text('Solve'),
                     ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        controller: _zController,
-                        decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                                icon: const Icon(Icons.close), iconSize: 20, onPressed: () => _zController.clear())),
-                        keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-                      ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              ElevatedButton(
-                onPressed: _solveWaterJugProblem,
-                child: const Text('Solve'),
-              ),
+
               if (state.solutionSteps.isNotEmpty)
                 Expanded(
                   child: SingleChildScrollView(
@@ -132,10 +159,20 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
                     ),
                   ),
                 ),
-              if (state.isSolutionFound && state.solutionSteps.isEmpty)
+              if (state.solutionNotFound && state.solutionSteps.isEmpty)
                 const Padding(
                   padding: EdgeInsets.all(20),
-                  child: Text("Solution not found"),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: Icon(Icons.do_disturb_on, size: 100, color: Colors.red),
+                      ),
+                      Text("Solution not found"),
+                    ],
+                  ),
                 ),
               // Optionally, include a message or container for the initial state
             ],
