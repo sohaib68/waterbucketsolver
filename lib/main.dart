@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:waterbucketsolver/app_settings/app_bloc_observer.dart';
+import 'package:waterbucketsolver/app_settings/app_theme.dart';
 import 'package:waterbucketsolver/pages/waterbucket_solver_cubit.dart';
 
 import 'package:waterbucketsolver/pages/waterbucket_solver_page.dart';
@@ -20,6 +21,7 @@ class WaterBucketApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
       home: BlocProvider(
         create: (context) => WaterBucketSolverCubit(),
         child: const WaterBucketSolverPage(),

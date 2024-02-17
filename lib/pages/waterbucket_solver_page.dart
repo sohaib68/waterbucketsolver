@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:waterbucketsolver/pages/waterbucket_solver_cubit.dart';
 import 'package:waterbucketsolver/widgets/custrom_int_textfield.dart';
@@ -30,7 +29,7 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
     super.dispose();
   }
 
-  void _solveWaterJugProblem() {
+  void _solveWaterBucketProblem() {
     final cubit = context.read<WaterBucketSolverCubit>();
     final int? x = int.tryParse(_xController.text);
     final int? y = int.tryParse(_yController.text);
@@ -49,6 +48,7 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return BlocBuilder<WaterBucketSolverCubit, WaterBucketSolverState>(
       builder: (context, state) {
         return Scaffold(
@@ -61,7 +61,8 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
                 margin: const EdgeInsets.all(10),
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  border: Border.all(width: 1.0),
+                  color: theme.colorScheme.background,
+                  border: Border.all(width: 1.0, color: Colors.transparent),
                   borderRadius: const BorderRadius.all(Radius.circular(10.0) //                 <--- border radius here
                       ),
                 ),
@@ -101,7 +102,7 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
                       ],
                     ),
                     ElevatedButton(
-                      onPressed: _solveWaterJugProblem,
+                      onPressed: _solveWaterBucketProblem,
                       child: const Text('Solve'),
                     ),
                   ],
@@ -128,9 +129,9 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
                               (step) => DataRow(
                                   color: MaterialStateProperty.resolveWith((states) {
                                     if (step.key + 1 == state.solutionSteps.length) {
-                                      return Colors.lightGreen.shade200;
+                                      return theme.primaryColor;
                                     } else {
-                                      return Colors.white;
+                                      return theme.cardColor;
                                     }
                                   }),
                                   cells: [

@@ -13,6 +13,7 @@ class CustomIntTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return TextField(
       autofocus: autoFocus ?? false,
       focusNode: focusNode,
@@ -21,10 +22,10 @@ class CustomIntTextField extends StatelessWidget {
       textAlignVertical: TextAlignVertical.center,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.grey), borderRadius: BorderRadius.circular(10)),
+            borderSide: BorderSide(color: theme.primaryColor, width: 0.7), borderRadius: BorderRadius.circular(10)),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Colors.black,
+          borderSide: BorderSide(
+            color: theme.primaryColor,
             width: 2,
           ),
           borderRadius: BorderRadius.circular(10),
