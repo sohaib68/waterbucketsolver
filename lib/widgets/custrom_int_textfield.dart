@@ -17,25 +17,26 @@ class CustomIntTextField extends StatelessWidget {
       autofocus: autoFocus ?? false,
       focusNode: focusNode,
       controller: controller,
+      textAlign: TextAlign.center,
+      textAlignVertical: TextAlignVertical.center,
       decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.grey), borderRadius: BorderRadius.circular(10)),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: Colors.black,
-              width: 2,
-            ),
-            borderRadius: BorderRadius.circular(10),
+        enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.grey), borderRadius: BorderRadius.circular(10)),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: Colors.black,
+            width: 2,
           ),
-          errorBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: Colors.red,
-              width: 2,
-            ),
-            borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: Colors.red,
+            width: 2,
           ),
-          suffixIcon:
-              IconButton(icon: const Icon(Icons.close_outlined), iconSize: 20, onPressed: () => controller?.clear())),
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
       keyboardType: TextInputType.number,
       inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
       onSubmitted: (_) {
