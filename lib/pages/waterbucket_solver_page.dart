@@ -17,6 +17,10 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
   final FocusNode _xFocus = FocusNode();
   final FocusNode _yFocus = FocusNode();
   final FocusNode _zFocus = FocusNode();
+  final snackBar = const SnackBar(
+    showCloseIcon: true,
+    content: Text('Please enter a value for all fields.'),
+  );
 
   @override
   void dispose() {
@@ -40,11 +44,6 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
       cubit.solve(x, y, z);
     }
   }
-
-  final snackBar = const SnackBar(
-    showCloseIcon: true,
-    content: Text('Please enter a value for all fields.'),
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +107,6 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
                   ],
                 ),
               ),
-
               if (state.solutionSteps.isNotEmpty)
                 Expanded(
                   child: SingleChildScrollView(
@@ -175,7 +173,6 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
                     ],
                   ),
                 ),
-              // Optionally, include a message or container for the initial state
             ],
           ),
         );
