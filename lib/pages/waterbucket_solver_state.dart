@@ -4,17 +4,14 @@ class WaterBucketSolverState extends Equatable {
   const WaterBucketSolverState({
     this.solutionSteps = const [],
     this.solutionNotFound = false,
-    this.errorMessage,
-    this.filter,
+    age,
   });
 
   final List<Map<String, String>> solutionSteps;
   final bool solutionNotFound;
-  final String? errorMessage;
-  final String? filter;
 
   @override
-  List<Object?> get props => [solutionSteps, solutionNotFound, errorMessage, filter];
+  List<Object?> get props => [solutionSteps, solutionNotFound];
 
   WaterBucketSolverState copyWith({
     List<Map<String, String>>? solutionSteps,
@@ -25,8 +22,6 @@ class WaterBucketSolverState extends Equatable {
     return WaterBucketSolverState(
       solutionSteps: solutionSteps ?? this.solutionSteps,
       solutionNotFound: solutionNotFound ?? this.solutionNotFound,
-      errorMessage: errorMessage ?? this.errorMessage,
-      filter: filter ?? this.filter,
     );
   }
 }
