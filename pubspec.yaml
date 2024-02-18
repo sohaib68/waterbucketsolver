@@ -13,11 +13,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.4
-  formz: ^0.4.1
   google_fonts: ^6.1.0
 
 dev_dependencies:
-  build_runner: ^2.4.8
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter

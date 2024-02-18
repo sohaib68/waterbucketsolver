@@ -33,12 +33,23 @@ class AppTheme {
   );
 
   static ColorScheme lightColorTheme = const ColorScheme.dark().copyWith(
-    background: Color.fromARGB(255, 234, 231, 231),
+    background: const Color.fromARGB(255, 234, 231, 231),
   );
+
+  static ElevatedButtonThemeData darkElevatedButtonTheme = ElevatedButtonThemeData(
+      style: ButtonStyle(
+          backgroundColor: MaterialStateColor.resolveWith((states) => primaryColorDark),
+          foregroundColor: MaterialStateColor.resolveWith((states) => Colors.white)));
+
+  static ElevatedButtonThemeData lightElevatedButtonTheme = ElevatedButtonThemeData(
+      style: ButtonStyle(
+          backgroundColor: MaterialStateColor.resolveWith((states) => primaryColorLight),
+          foregroundColor: MaterialStateColor.resolveWith((states) => Colors.white)));
 
   static ThemeData darkTheme = ThemeData.dark().copyWith(
       colorScheme: darkColorTheme,
       scaffoldBackgroundColor: scaffoldBackgroundColorDark,
+      elevatedButtonTheme: darkElevatedButtonTheme,
       primaryColor: primaryColorDark,
       primaryColorLight: primaryColorLight,
       primaryColorDark: primaryColorDark,
@@ -81,6 +92,7 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
       colorScheme: lightColorTheme,
       scaffoldBackgroundColor: scaffoldBackgroundColorLight,
+      elevatedButtonTheme: lightElevatedButtonTheme,
       primaryColor: primaryColorLight,
       primaryColorLight: primaryColorLight,
       primaryColorDark: primaryColorDark,

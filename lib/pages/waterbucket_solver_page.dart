@@ -19,7 +19,7 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
   final FocusNode _zFocus = FocusNode();
   final snackBar = const SnackBar(
     showCloseIcon: true,
-    content: Text('Please enter a value for all fields.'),
+    content: Text('Please enter integer values for all fields.'),
   );
 
   @override
@@ -54,129 +54,142 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
           appBar: AppBar(
             title: const Text('Water Bucket Challenge Solver'),
           ),
-          body: Column(
-            children: <Widget>[
-              Container(
-                margin: const EdgeInsets.all(10),
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.background,
-                  border: Border.all(width: 1.0, color: Colors.transparent),
-                  borderRadius: const BorderRadius.all(Radius.circular(10.0) //                 <--- border radius here
-                      ),
-                ),
-                child: Column(
-                  children: [
-                    const Text('Please enter integer only values'),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: CustomIntTextField(
-                                key: const ValueKey('XTextField'),
-                                autoFocus: true,
-                                focusNode: _xFocus,
-                                nextFocus: _yFocus,
-                                controller: _xController,
-                              )),
-                        ),
-                        Expanded(
-                          child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: CustomIntTextField(
-                                key: const ValueKey('YTextField'),
-                                focusNode: _yFocus,
-                                nextFocus: _zFocus,
-                                controller: _yController,
-                              )),
-                        ),
-                        Expanded(
-                          child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: CustomIntTextField(
-                                key: const ValueKey('ZTextField'),
-                                focusNode: _zFocus,
-                                nextFocus: _xFocus,
-                                controller: _zController,
-                              )),
-                        ),
-                      ],
-                    ),
-                    ElevatedButton(
-                      onPressed: _solveWaterBucketProblem,
-                      child: const Text('Solve'),
-                    ),
-                  ],
-                ),
-              ),
-              if (state.solutionSteps.isNotEmpty)
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 30),
-                      child: DataTable(
-                        columnSpacing: 30,
-                        columns: const [
-                          DataColumn(label: Text('')),
-                          DataColumn(label: Text('X')),
-                          DataColumn(label: Text('Y')),
-                          DataColumn(label: Text('Explanation')),
-                        ],
-                        rows: state.solutionSteps
-                            .asMap()
-                            .entries
-                            .map(
-                              (step) => DataRow(
-                                  color: MaterialStateProperty.resolveWith((states) {
-                                    if (step.key + 1 == state.solutionSteps.length) {
-                                      return theme.primaryColor;
-                                    } else {
-                                      return theme.cardColor;
-                                    }
-                                  }),
-                                  cells: [
-                                    DataCell(ConstrainedBox(
-                                      constraints: const BoxConstraints(maxWidth: 50),
-                                      child: Text(
-                                        '${(step.key + 1).toString()}.',
-                                        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                                      ),
-                                    )),
-                                    DataCell(ConstrainedBox(
-                                      constraints: const BoxConstraints(maxWidth: 50),
-                                      child: Text(step.value['x'] ?? '',
-                                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                                    )),
-                                    DataCell(ConstrainedBox(
-                                      constraints: const BoxConstraints(maxWidth: 50),
-                                      child: Text(step.value['y'] ?? '',
-                                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                                    )),
-                                    DataCell(Text(((step.value['explanation'] ?? '')))),
-                                  ]),
-                            )
-                            .toList(),
-                      ),
-                    ),
+          body: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.background,
+                    border: Border.all(width: 1.0, color: Colors.transparent),
+                    borderRadius:
+                        const BorderRadius.all(Radius.circular(10.0) //                 <--- border radius here
+                            ),
                   ),
-                ),
-              if (state.solutionNotFound && state.solutionSteps.isEmpty)
-                const Padding(
-                  padding: EdgeInsets.all(20),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.all(20.0),
-                        child: Icon(Icons.do_disturb_on, size: 100, color: Colors.red),
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 8.0),
+                        child: Text('Please enter integer values for all three fields.'),
                       ),
-                      Text("Solution not found"),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CustomIntTextField(
+                                  key: const ValueKey('XTextField'),
+                                  label: 'Bucket X',
+                                  focusNode: _xFocus,
+                                  nextFocus: _yFocus,
+                                  controller: _xController,
+                                )),
+                          ),
+                          Expanded(
+                            child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CustomIntTextField(
+                                  key: const ValueKey('YTextField'),
+                                  label: 'Bucket Y',
+                                  focusNode: _yFocus,
+                                  nextFocus: _zFocus,
+                                  controller: _yController,
+                                )),
+                          ),
+                          Expanded(
+                            child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CustomIntTextField(
+                                  key: const ValueKey('ZTextField'),
+                                  label: 'Target Z',
+                                  focusNode: _zFocus,
+                                  nextFocus: _xFocus,
+                                  controller: _zController,
+                                )),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5.0),
+                        child: ElevatedButton(
+                          onPressed: _solveWaterBucketProblem,
+                          child: const Text('Solve'),
+                        ),
+                      ),
                     ],
                   ),
                 ),
-            ],
+                if (state.solutionSteps.isNotEmpty)
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 30),
+                        child: DataTable(
+                          columnSpacing: 30,
+                          columns: const [
+                            DataColumn(label: Text('')),
+                            DataColumn(label: Text('X')),
+                            DataColumn(label: Text('Y')),
+                            DataColumn(label: Text('Explanation')),
+                          ],
+                          rows: state.solutionSteps
+                              .asMap()
+                              .entries
+                              .map(
+                                (step) => DataRow(
+                                    color: MaterialStateProperty.resolveWith((states) {
+                                      if (step.key + 1 == state.solutionSteps.length) {
+                                        return theme.primaryColor;
+                                      } else {
+                                        return theme.cardColor;
+                                      }
+                                    }),
+                                    cells: [
+                                      DataCell(ConstrainedBox(
+                                        constraints: const BoxConstraints(maxWidth: 50),
+                                        child: Text(
+                                          '${(step.key + 1).toString()}.',
+                                          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                                        ),
+                                      )),
+                                      DataCell(ConstrainedBox(
+                                        constraints: const BoxConstraints(maxWidth: 50),
+                                        child: Text(step.value['x'] ?? '',
+                                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                                      )),
+                                      DataCell(ConstrainedBox(
+                                        constraints: const BoxConstraints(maxWidth: 50),
+                                        child: Text(step.value['y'] ?? '',
+                                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                                      )),
+                                      DataCell(Text(((step.value['explanation'] ?? '')))),
+                                    ]),
+                              )
+                              .toList(),
+                        ),
+                      ),
+                    ),
+                  ),
+                if (state.solutionNotFound && state.solutionSteps.isEmpty)
+                  const Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(20.0),
+                          child: Icon(Icons.do_disturb_on, size: 100, color: Colors.red),
+                        ),
+                        Text("Solution not found"),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
           ),
         );
       },

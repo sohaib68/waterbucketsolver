@@ -22,6 +22,7 @@ class CustomIntTextField extends StatelessWidget {
       textAlign: TextAlign.center,
       textAlignVertical: TextAlignVertical.center,
       decoration: InputDecoration(
+        label: Text(label ?? ''),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: theme.primaryColor, width: 0.7), borderRadius: BorderRadius.circular(10)),
         focusedBorder: OutlineInputBorder(
