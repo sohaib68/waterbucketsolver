@@ -73,9 +73,9 @@ class AppTheme {
               UnderlineInputBorder(borderSide: BorderSide(style: BorderStyle.solid, color: primaryColorDark))),
       textTheme: GoogleFonts.robotoTextTheme(
         TextTheme(
-          displayLarge: TextStyle(fontSize: largeFontSize + 1),
-          displayMedium: TextStyle(fontSize: mediumFontSize),
-          displaySmall: TextStyle(fontSize: smallFontSize),
+          displayLarge: TextStyle(fontSize: largeFontSize + 1, fontWeight: FontWeight.bold),
+          displayMedium: TextStyle(fontSize: mediumFontSize, fontWeight: FontWeight.bold),
+          displaySmall: TextStyle(fontSize: smallFontSize, fontWeight: FontWeight.bold),
           titleLarge: TextStyle(fontSize: largeFontSize, color: Colors.white),
           titleMedium: TextStyle(fontSize: mediumFontSize, color: Colors.white),
           titleSmall: TextStyle(fontSize: smallFontSize, color: Colors.white),
@@ -116,9 +116,9 @@ class AppTheme {
               UnderlineInputBorder(borderSide: BorderSide(style: BorderStyle.solid, color: primaryColorLight))),
       textTheme: GoogleFonts.robotoTextTheme(
         TextTheme(
-            displayLarge: TextStyle(fontSize: largeFontSize + 1, color: Colors.black),
-            displayMedium: TextStyle(fontSize: mediumFontSize, color: Colors.black),
-            displaySmall: TextStyle(fontSize: smallFontSize, color: Colors.black),
+            displayLarge: TextStyle(fontSize: largeFontSize + 1, color: Colors.black, fontWeight: FontWeight.bold),
+            displayMedium: TextStyle(fontSize: mediumFontSize, color: Colors.black, fontWeight: FontWeight.bold),
+            displaySmall: TextStyle(fontSize: smallFontSize, color: Colors.black, fontWeight: FontWeight.bold),
             titleLarge: TextStyle(fontSize: largeFontSize, color: Colors.black),
             titleMedium: TextStyle(fontSize: mediumFontSize, color: Colors.black),
             titleSmall: TextStyle(fontSize: smallFontSize, color: Colors.black),
