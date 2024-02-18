@@ -5,8 +5,8 @@ This project is a flutter application that solves the water bucket problem.  The
 If a solution is found, the app will display all the steps required to reach the solution.  In the event a solution is not possible, the app will display a "Solution not found" message.
 
 The algortihm uses these optimization technigues:
-- Queue: Use a queue data structure to keep track of the states to explore.
-- BFS: Start from the initial state and perform a breadth-first search, exploring states level by level until reaching the goal state. This guarantees finding the shortest path to the goal state.
+- Queue: Uses a queue data structure to keep track of the states to explore.
+- BFS: Starts from the initial state and performs a breadth-first search, exploring states level by level until reaching the goal state. This guarantees finding the shortest path to the goal state.
 - Optimization: Implements memoization to avoid revisiting already explored states.
 
 ## Supported Platforms
