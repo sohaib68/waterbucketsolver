@@ -9,7 +9,7 @@ The algortihm uses these optimization technigues:
 
 ## Supported Platforms
 
-The app suppords iOS, Android, Web, macOS, Windows, and Linux.
+The app suppords iOS, Android, Web, macOS, Windows, and Linux.  In iOS and Android, the app supports both portrait and landscape modes.
 
 ## Usage
 
@@ -33,7 +33,7 @@ flutter test
 
 ### Run The App
 
-To run the app on your selected, use the following command:
+To run the app on your selected device, use the following command:
 
 ```bash
 flutter run
