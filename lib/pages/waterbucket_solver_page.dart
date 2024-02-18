@@ -65,9 +65,7 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
                   decoration: BoxDecoration(
                     color: theme.colorScheme.background,
                     border: Border.all(width: 1.0, color: Colors.transparent),
-                    borderRadius:
-                        const BorderRadius.all(Radius.circular(10.0) //                 <--- border radius here
-                            ),
+                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                   ),
                   child: Column(
                     children: [
