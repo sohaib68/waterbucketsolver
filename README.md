@@ -7,6 +7,9 @@ The algortihm uses these optimization technigues:
 - BFS: Start from the initial state and perform a breadth-first search, exploring states level by level until reaching the goal state. This guarantees finding the shortest path to the goal state.
 - Optimization: Implements memoization to avoid revisiting already explored states.
 
+## Supported Platforms
+
+The app suppords iOS, Android, Web, macOS, Windows, and Linux.
 
 ## Usage
 
@@ -36,6 +39,9 @@ To run the app on your selected, use the following command:
 flutter run
 ```
 
+### Constraints
+
+The app only accepts integers for Bucket X, Bucket Y, and Target Amount.  If a non-integer is entered in one of the fields OR a field is left blank, the app will prompt to correct the input.  
 
 
 
