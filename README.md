@@ -1,6 +1,6 @@
 # Water Bucket Challenge
 
-This project is a flutter application that solves the water bucket problem.  The app uses Breadth-First Search (BFS) algorithm to explore all possible states from the initial state (both buckets empty) until goal state is reached (one of the buckets contains Z gallons of water). Each state represents the amount of water in both buckets at any step, and the transition happens according to allowed steps (fill bucket X OR Y, empty bucket X OR Y, transfer from one bucket to the other).
+This project is a flutter app that solves the water bucket problem.  The app uses Breadth-First Search (BFS) algorithm to explore all possible states from the initial state (both buckets empty) until goal state is reached (one of the buckets contains Z gallons of water). Each state represents the amount of water in both buckets at any step, and the transition happens according to allowed steps (fill bucket X OR Y, empty bucket X OR Y, transfer from one bucket to the other).
 
 The last step which represents a solution is highlighted.
 
