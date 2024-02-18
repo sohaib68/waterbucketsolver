@@ -4,7 +4,6 @@ class WaterBucketSolverState extends Equatable {
   const WaterBucketSolverState({
     this.solutionSteps = const [],
     this.solutionNotFound = false,
-    age,
   });
 
   final List<Map<String, String>> solutionSteps;
@@ -16,8 +15,6 @@ class WaterBucketSolverState extends Equatable {
   WaterBucketSolverState copyWith({
     List<Map<String, String>>? solutionSteps,
     bool? solutionNotFound,
-    String? errorMessage,
-    String? filter,
   }) {
     return WaterBucketSolverState(
       solutionSteps: solutionSteps ?? this.solutionSteps,
