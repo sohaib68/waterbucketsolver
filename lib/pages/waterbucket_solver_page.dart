@@ -147,23 +147,18 @@ class WaterBucketSolverPageState extends State<WaterBucketSolverPage> {
                                     }),
                                     cells: [
                                       DataCell(ConstrainedBox(
-                                        constraints: const BoxConstraints(maxWidth: 50),
-                                        child:
-                                            Text('${(step.key + 1).toString()}.', style: theme.textTheme.displaySmall),
-                                      )),
+                                          constraints: const BoxConstraints(maxWidth: 50),
+                                          child: Text('${(step.key + 1).toString()}.',
+                                              style: theme.textTheme.displaySmall))),
+                                      DataCell(ConstrainedBox(
+                                          constraints: const BoxConstraints(maxWidth: 50),
+                                          child: Text(
+                                            step.value['x'] ?? '',
+                                            style: theme.textTheme.displayLarge,
+                                          ))),
                                       DataCell(ConstrainedBox(
                                         constraints: const BoxConstraints(maxWidth: 50),
-                                        child: Text(
-                                          step.value['x'] ?? '',
-                                          style: theme.textTheme.displayLarge,
-                                        ),
-                                      )),
-                                      DataCell(ConstrainedBox(
-                                        constraints: const BoxConstraints(maxWidth: 50),
-                                        child: Text(
-                                          step.value['y'] ?? '',
-                                          style: theme.textTheme.displayLarge,
-                                        ),
+                                        child: Text(step.value['y'] ?? '', style: theme.textTheme.displayLarge),
                                       )),
                                       DataCell(Text(((step.value['explanation'] ?? '')))),
                                     ]),
